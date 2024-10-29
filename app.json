@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "Dopamind_Plus",
-    "slug": "Dopamind_Plus",
+    "displayName": "Dopamind_Plus",
+    "slug": "dopamind",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,6 +23,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b6bc3e8f-1239-4c51-b0ce-eb26c935c8ff"
+      }
+    },
+    "owner": "kiki26"
   }
 }
