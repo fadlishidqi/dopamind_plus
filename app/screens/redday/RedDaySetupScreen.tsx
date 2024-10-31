@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View, 
-  StyleSheet, 
-  Image, 
-  TouchableOpacity, 
-  ActivityIndicator,
-  SafeAreaView,
-  StatusBar,
-  Alert
-} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, ActivityIndicator, SafeAreaView, StatusBar, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import CustomTextBold from '../../components/CustomTextBold';
@@ -35,14 +26,14 @@ const RedDaySetupScreen: React.FC = () => {
         startDate: hasActivePeriod ? currentDate.toISOString() : null,
         lastPeriod: hasActivePeriod ? currentDate.toISOString() : null,
         cycleLength: 28,
-        periodLength: 5,
+        periodLength: hasActivePeriod ? 7 : 0,
         isFirstTimeSetup: false,
         symptoms: [],
         notes: '',
       };
-
+  
       await AsyncStorage.setItem('@period_data', JSON.stringify(cycleData));
-
+  
       navigation.replace('RedDayTracker', {
         isFirstCycle: true,
         currentCycleData: cycleData,
@@ -62,6 +53,12 @@ const RedDaySetupScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       
+      {/* Background Image */}
+      <Image 
+        source={require('../../../assets/images/bgpink.png')}
+        style={styles.backgroundImage}
+      />
+      
       <View style={styles.header}>
         <TouchableOpacity 
           onPress={() => navigation.goBack()}
@@ -73,7 +70,7 @@ const RedDaySetupScreen: React.FC = () => {
 
       <View style={styles.content}>
         <Image 
-          source={require('../../../assets/images/logo.png')}
+          source={require('../../../assets/images/manwoman.png')}
           style={styles.illustration}
         />
 
@@ -120,6 +117,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    
+  },
   header: {
     paddingTop: StatusBar.currentHeight || 0,
     paddingHorizontal: 20,
@@ -164,12 +171,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   yesButton: {
-    backgroundColor: '#FFB5BA',
+    backgroundColor: '#FFABC1',
   },
   noButton: {
     backgroundColor: '#FFFFFF',
     borderWidth: 2,
-    borderColor: '#FFB5BA',
+    borderColor: '#FFABC1',
   },
   buttonText: {
     fontSize: 16,
@@ -178,7 +185,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   noButtonText: {
-    color: '#FFB5BA',
+    color: '#FFABC1',
   },
 });
 

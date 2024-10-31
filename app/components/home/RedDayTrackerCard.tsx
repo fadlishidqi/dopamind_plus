@@ -1,5 +1,5 @@
 // app/components/home/RedDayTrackerCard.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -16,9 +16,8 @@ interface RedDayTrackerCardProps {
   onPress?: () => void;
 }
 
-const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
+const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = ({ onPress }) => {
   const navigation = useNavigation<RedDayTrackerNavigationProp>();
-  const [daysCount, setDaysCount] = useState<number>(0);
   const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   useFocusEffect(
@@ -26,15 +25,6 @@ const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
       checkPeriodData();
     }, [])
   );
-
-  const calculateDaysUntilNextPeriod = (lastPeriod: Date, cycleLength: number): number => {
-    const today = new Date();
-    const nextPeriod = new Date(lastPeriod);
-    nextPeriod.setDate(lastPeriod.getDate() + cycleLength);
-    
-    const timeDiff = nextPeriod.getTime() - today.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
-  };
 
   const checkPeriodData = async () => {
     try {
@@ -54,15 +44,6 @@ const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
 
       setIsFirstTime(data.isFirstTimeSetup);
       
-      if (data.lastPeriod) {
-        const lastPeriod = new Date(data.lastPeriod);
-        const daysUntil = calculateDaysUntilNextPeriod(
-          lastPeriod, 
-          data.cycleLength || 7
-        );
-        setDaysCount(daysUntil);
-      }
-      
     } catch (error) {
       console.error('Error reading period data:', error);
       setIsFirstTime(true);
@@ -80,7 +61,6 @@ const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
 
       const data: CycleData = JSON.parse(storedData);
       
-      // Cek apakah setup sudah selesai
       if (data && data.isFirstTimeSetup === false) {
         navigation.navigate('RedDayTracker', {
           isFirstCycle: false,
@@ -96,13 +76,8 @@ const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
   };
 
   const getDaysText = (): string => {
-    if (daysCount === 0) {
-      return "0";
-    } else if (daysCount === 1) {
-      return "1";
-    } else {
-      return `${daysCount}`;
-    }
+    const today = new Date();
+    return today.getDate().toString();
   };
 
   return (
@@ -113,7 +88,7 @@ const RedDayTrackerCard: React.FC<RedDayTrackerCardProps> = () => {
     >
       <View style={styles.circleOutline}>
         <View style={styles.circleInner}>
-          <Text style={styles.number}>{getDaysText()}</Text>
+          <CustomTextBold style={styles.number}>{getDaysText()}</CustomTextBold>
         </View>
       </View>
       
