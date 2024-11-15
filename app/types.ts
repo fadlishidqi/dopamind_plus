@@ -21,6 +21,26 @@ type Doctor = {
   notes?: string;
   isFirstTimeSetup: boolean;
  }
+
+ export interface Activity {
+  id: string;
+  title: string;
+  description?: string;
+  time: string;
+  date: string;
+  type: string;
+  status?: 'NOW' | 'UPCOMING' | 'DONE';
+}
+
+export interface MarkedDates {
+  [date: string]: {
+    marked?: boolean;
+    selected?: boolean;
+    selectedColor?: string;
+    dotColor?: string;
+  };
+}
+
  
  export type RootStackParamList = {
   SplashScreen: undefined;
@@ -44,4 +64,7 @@ type Doctor = {
     isFirstCycle: boolean;
     currentCycleData: CycleData;
   };
+  SleepTracker: undefined;
+  SleepTimer: undefined;
+  Calendar: undefined;
  };

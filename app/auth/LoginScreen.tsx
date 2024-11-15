@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
 import { auth } from '../../firebaseConfig';
-import CustomText from '../components/CustomTextReg';
 import CustomTextInput from '../components/CustomTextInput';
 import CustomTextBold from '../components/CustomTextBold';
 import CustomTextReg from '../components/CustomTextReg';

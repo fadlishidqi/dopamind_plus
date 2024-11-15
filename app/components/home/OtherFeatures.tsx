@@ -2,6 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import CustomTextBold from '../CustomTextBold';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../types';
+
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 interface FeatureItemProps {
   icon: React.ComponentProps<typeof Ionicons>['name'];
@@ -37,9 +42,10 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description, ico
 };
 
 const OtherFeaturesSection: React.FC = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   const handleSleepTrackerPress = () => {
-    console.log('Sleep Tracker pressed');
-    // Add your navigation logic or other actions here
+    navigation.navigate('SleepTracker');
   };
 
   return (

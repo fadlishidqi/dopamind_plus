@@ -20,6 +20,9 @@ import SosScreen from './app/screens/emergency/SosScreen';
 import DetailSos from './app/screens/emergency/DetailSos';
 import RedDaySetupScreen from './app/screens/redday/RedDaySetupScreen';
 import RedDayTrackerScreen from './app/screens/redday/RedDayTrackerScreen';
+import SleepTrackerScreen from './app/screens/sleep/SleepTrackerScreen';
+import SleepTimerScreen from './app/screens/sleep/SleepTimerScreen';
+import CalendarScreen from './app/screens/calendar/CalendarScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -134,6 +137,21 @@ export default function App() {
             component={RedDayTrackerScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="SleepTracker"
+            component={SleepTrackerScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+          name="SleepTimer"
+          component={SleepTimerScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Calendar"
+          component={CalendarScreen}
+          options={{ headerShown: false }}
+        />
         </Stack.Navigator>
       </NavigationContainer>
     </NotificationProvider>

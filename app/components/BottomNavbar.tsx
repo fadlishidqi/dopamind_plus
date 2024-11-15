@@ -1,6 +1,6 @@
 // app/components/BottomNavbar.tsx
 import React, { useRef } from 'react';
-import { View, TouchableOpacity, StyleSheet, Animated, Text, Image } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Animated, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomTextBold from './CustomTextBold';
@@ -11,7 +11,7 @@ const BottomNavbar = () => {
 
   const scaleValues = {
     Calendar: useRef(new Animated.Value(1)).current,
-    Notifications: useRef(new Animated.Value(1)).current,
+    SosScreen: useRef(new Animated.Value(1)).current,
     HomeScreen: useRef(new Animated.Value(1)).current,
   };
 
@@ -50,11 +50,11 @@ const BottomNavbar = () => {
         <TouchableOpacity
           style={[styles.iconContainer, styles.centerIcon]}
           onPress={() => {
-            animatePress('Notifications');
+            animatePress('SosScreen');
             navigation.navigate('SosScreen' as never);
           }}
         >
-          <Animated.View style={{ transform: [{ scale: scaleValues.Notifications }] }}>
+          <Animated.View style={{ transform: [{ scale: scaleValues.SosScreen }] }}>
             <Ionicons name="notifications" size={32} color="#FFF" />
           </Animated.View>
         </TouchableOpacity>
@@ -64,6 +64,7 @@ const BottomNavbar = () => {
   );
 };
 
+// Gunakan style yang sudah ada sebelumnya
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
